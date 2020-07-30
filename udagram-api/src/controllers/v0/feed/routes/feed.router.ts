@@ -32,8 +32,12 @@ router.get('/', async (req: Request, res: Response) => {
   items.rows.map((item) => {
     if (item.url) {
       item.url = AWS.getGetSignedUrl(item.url);
+      console.log(item.url)
+
     }
   });
+
+
   res.send(items);
 });
 
@@ -77,6 +81,7 @@ router.post('/',
       const savedItem = await item.save();
 
       savedItem.url = AWS.getGetSignedUrl(savedItem.url);
+
       res.status(201).send(savedItem);
     });
 
